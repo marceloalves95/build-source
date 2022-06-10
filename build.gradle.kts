@@ -36,5 +36,9 @@ gradlePlugin {
             id = "compose-library-plugin"
             implementationClass = "ComposePlugin"
         }
+        register("extensions-library-plugin") {
+            id = "extensions-library-plugin"
+            implementationClass = "ExtensionsPlugin"
+        }
     }
 }

@@ -66,6 +66,48 @@ fun Project.applyAndroid() {
     }
 }
 
+@Suppress("UnstableApiUsage")
+fun Project.applyAndroidCompose() {
+    with(android) {
+        compileSdkVersion(AppConfig.compileSdkVersion)
+        defaultConfig {
+            minSdk = AppConfig.minSdkVersion
+            targetSdk = AppConfig.targetSdkVersion
+            versionCode = AppConfig.versionCode
+            versionName = AppConfig.versionName
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+            vectorDrawables.useSupportLibrary = true
+
+        }
+
+        buildTypes {
+            getByName("release") {
+                minifyEnabled(false)
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+
+        tasks.withType<KotlinCompile> {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+
+        composeOptions.kotlinCompilerExtensionVersion = Version.compose_version
+
+        buildFeatures.compose = true
+    }
+
+}
+
 fun Project.mavenPublishLocal(
     groupId: String,
     artifactId: String,

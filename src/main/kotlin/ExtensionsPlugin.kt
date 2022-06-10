@@ -5,21 +5,24 @@ import org.gradle.kotlin.dsl.dependencies
 
 /**
  * @author RubioAlves
- * Created 27/04/2022 at 07:19
+ * Created 01/05/2022 at 12:27
  */
-class ComposePlugin: Plugin<Project> {
+class ExtensionsPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         with(project) {
             applyPlugins()
-            applyAndroidCompose()
+            applyAndroid()
             applyDependencies()
         }
     }
 
     private fun Project.applyDependencies() {
         dependencies {
-            compose()
-            composeTest()
+            material()
+            kotlin()
+            lifecycle()
+            viewBinding()
+            shimmer()
         }
     }
 }
